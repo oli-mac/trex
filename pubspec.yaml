@@ -52,6 +52,7 @@ dependencies:
   # for network connectivity check
   # https://pub.dev/packages/connectivity_plus
   connectivity_plus: ^6.0.4
+  get_storage: ^2.1.1
 
 
 
