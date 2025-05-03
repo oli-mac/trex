@@ -8,17 +8,16 @@ class SplashView extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: Color.fromRGBO(234, 227, 219, 1),
       body: Obx(() {
         final step = controller.splashStep.value;
 
         if (step == 0) {
           return Center(
-            child: Image.asset(
-              'assets/images/logo.jpeg',
-            ),
-          );
+              child: Image.asset(
+            isDark ? 'assets/images/logo-dark.png' : 'assets/images/logo.png',
+          ));
         } else if (step == 1) {
           return Center(
             child: LoadingAnimationWidget.discreteCircle(

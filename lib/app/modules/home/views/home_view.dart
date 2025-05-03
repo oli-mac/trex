@@ -13,7 +13,6 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(234, 227, 219, 1),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(Icons.rocket_launch),
@@ -36,7 +35,7 @@ class HomeView extends GetView<HomeController> {
               // SearchBar(),
               SizedBox(height: 12),
               WelcomeBanner(
-                message: "Welcome!\nLet's schedule your projects",
+                message: "Welcome!\nLet T-rex organize your media",
               ),
               OngoingProjectsGrid(),
             ],

@@ -4,6 +4,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/theme/bindings/theme_binding.dart';
+import '../modules/theme/views/theme_view.dart';
 
 part 'app_routes.dart';
 
@@ -23,5 +25,10 @@ class AppPages {
       page: () => const SplashView(),
       binding: SplashBinding(),
     ),
+    // GetPage(
+    //   name: _Paths.THEME,
+    //   page: () => const ThemeView(),
+    //   binding: ThemeBinding(),
+    // ),
   ];
 }

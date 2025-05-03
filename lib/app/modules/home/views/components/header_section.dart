@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:trex/app/modules/theme/controllers/theme_controller.dart';
 
 class HeaderSection extends StatelessWidget {
   final String username;
@@ -27,7 +29,15 @@ class HeaderSection extends StatelessWidget {
                   style: TextStyle(fontSize: 14, color: Colors.grey)),
             ],
           ),
-          Icon(Icons.notifications, color: Colors.grey[700])
+          IconButton(
+            icon: Obx(() {
+              final isDark =
+                  Get.find<ThemeController>().themeMode.value == ThemeMode.dark;
+              return Icon(
+                  size: 30, isDark ? Icons.light_mode : Icons.dark_mode);
+            }),
+            onPressed: () => Get.find<ThemeController>().toggleTheme(),
+          )
         ],
       ),
     );

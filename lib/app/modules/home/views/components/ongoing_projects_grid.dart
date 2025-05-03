@@ -71,7 +71,7 @@ class OngoingProjectsGrid extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Ongoing Media',
+              Text('Ongoing Lists',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               Text('view all', style: TextStyle(color: Colors.blue)),
             ],
