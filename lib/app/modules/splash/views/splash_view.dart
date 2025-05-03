@@ -9,14 +9,14 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(234, 227, 219, 1),
       body: Obx(() {
         final step = controller.splashStep.value;
 
         if (step == 0) {
           return Center(
             child: Image.asset(
-              'assets/images/No_Internet_Connection.png',
-              height: 200,
+              'assets/images/logo.jpeg',
             ),
           );
         } else if (step == 1) {
@@ -35,7 +35,7 @@ class SplashView extends GetView<SplashController> {
             children: [
               Expanded(
                 child: Image.asset(
-                  'assets/images/No_Internet_Connection.png',
+                  'assets/images/no-connection.png',
                   height: 200,
                 ),
               ),
