@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:trex/app/modules/theme/controllers/theme_controller.dart';
 
 class HeaderSection extends StatelessWidget {

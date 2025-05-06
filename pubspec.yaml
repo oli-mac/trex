@@ -53,6 +53,10 @@ dependencies:
   # https://pub.dev/packages/connectivity_plus
   connectivity_plus: ^6.0.4
   get_storage: ^2.1.1
+  # https://pub:dev/packages/carousel_slider/install:
+  # A carousel slider widget, support infinite scroll and custom child widget.
+  carousel_slider: ^5.0.0
+
 
 
 

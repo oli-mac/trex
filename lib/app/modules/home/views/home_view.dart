@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trex/app/modules/home/views/components/bottom_navigation.dart';
+import 'package:flutter/material.dart';
 import 'package:trex/app/modules/home/views/components/header_section.dart';
-import 'package:trex/app/modules/home/views/components/ongoing_projects_grid.dart';
 import 'package:trex/app/modules/home/views/components/welcome_banner.dart';
+import 'package:trex/app/modules/home/views/components/bottom_navigation.dart';
+import 'package:trex/app/modules/home/views/components/ongoing_projects_grid.dart';
 
 import '../controllers/home_controller.dart';
 
