@@ -56,6 +56,7 @@ dependencies:
   # https://pub:dev/packages/carousel_slider/install:
   # A carousel slider widget, support infinite scroll and custom child widget.
   carousel_slider: ^5.0.0
+  curved_labeled_navigation_bar: ^2.0.6
 
 
 
