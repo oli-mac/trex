@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:trex/app/modules/navigation/controllers/navigation_controller.dart';
 import 'package:trex/app/routes/app_pages.dart';
 import 'package:trex/app/config/config_service.dart';
 import 'package:trex/app/config/connection_service.dart';
@@ -14,6 +15,7 @@ void main() async {
   await Get.putAsync(() => ConfigService().init());
   await Get.putAsync(() => ConnectionService().init());
   Get.put(ThemeController()); // Add Theme Controller
+  Get.put(BottomNavController());
 
   runApp(MyApp());
 }
