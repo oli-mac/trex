@@ -7,60 +7,60 @@ class OngoingProjectsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final projects = [
-      {
-        'title': 'Mobile App',
-        'subtitle': 'E-Commerce',
-        'date': 'May 30, 2022',
-        'progress': 0.5
-      },
-      {
-        'title': 'Dashboard',
-        'subtitle': 'Web',
-        'date': 'May 30, 2022',
-        'progress': 0.8
-      },
-      {
-        'title': 'Banner',
-        'subtitle': 'Marketing',
-        'date': 'May 30, 2022',
-        'progress': 0.4
-      },
-      {
-        'title': 'UI/UX',
-        'subtitle': 'Task Manager',
-        'date': 'May 30, 2022',
-        'progress': 0.6
-      },
-      {
-        'title': 'Banner',
-        'subtitle': 'Marketing',
-        'date': 'May 30, 2022',
-        'progress': 0.2
-      },
-      {
-        'title': 'UI/UX',
-        'subtitle': 'Task Manager',
-        'date': 'May 30, 2022',
-        'progress': 0.5
-      },
-      {
-        'title': 'UI/UX',
-        'subtitle': 'Task Manager',
-        'date': 'May 30, 2022',
-        'progress': 0.6
-      },
-      {
-        'title': 'Banner',
-        'subtitle': 'Marketing',
-        'date': 'May 30, 2022',
-        'progress': 0.2
-      },
-      {
-        'title': 'UI/UX',
-        'subtitle': 'Task Manager',
-        'date': 'May 30, 2022',
-        'progress': 0.5
-      },
+      // {
+      //   'title': 'Mobile App',
+      //   'subtitle': 'E-Commerce',
+      //   'date': 'May 30, 2022',
+      //   'progress': 0.5
+      // },
+      // {
+      //   'title': 'Dashboard',
+      //   'subtitle': 'Web',
+      //   'date': 'May 30, 2022',
+      //   'progress': 0.8
+      // },
+      // {
+      //   'title': 'Banner',
+      //   'subtitle': 'Marketing',
+      //   'date': 'May 30, 2022',
+      //   'progress': 0.4
+      // },
+      // {
+      //   'title': 'UI/UX',
+      //   'subtitle': 'Task Manager',
+      //   'date': 'May 30, 2022',
+      //   'progress': 0.6
+      // },
+      // {
+      //   'title': 'Banner',
+      //   'subtitle': 'Marketing',
+      //   'date': 'May 30, 2022',
+      //   'progress': 0.2
+      // },
+      // {
+      //   'title': 'UI/UX',
+      //   'subtitle': 'Task Manager',
+      //   'date': 'May 30, 2022',
+      //   'progress': 0.5
+      // },
+      // {
+      //   'title': 'UI/UX',
+      //   'subtitle': 'Task Manager',
+      //   'date': 'May 30, 2022',
+      //   'progress': 0.6
+      // },
+      // {
+      //   'title': 'Banner',
+      //   'subtitle': 'Marketing',
+      //   'date': 'May 30, 2022',
+      //   'progress': 0.2
+      // },
+      // {
+      //   'title': 'UI/UX',
+      //   'subtitle': 'Task Manager',
+      //   'date': 'May 30, 2022',
+      //   'progress': 0.5
+      // },
     ];
 
     return Padding(
@@ -77,6 +77,9 @@ class OngoingProjectsGrid extends StatelessWidget {
             ],
           ),
           SizedBox(height: 16),
+          projects.isEmpty
+              ? const Center(child: Text('No ongoing Lists found.'))
+              : const SizedBox.shrink(),
           GridView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),

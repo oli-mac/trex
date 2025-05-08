@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/BookDetail/bindings/book_detail_binding.dart';
+import '../modules/BookDetail/views/book_detail_view.dart';
 import '../modules/bookshome/bindings/bookshome_binding.dart';
 import '../modules/bookshome/views/bookshome_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -45,7 +47,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.BOOKSHOME,
-      page: () => const BookshomeView(),
+      page: () => BookshomeView(),
       binding: BookshomeBinding(),
     ),
     // GetPage(
@@ -58,5 +60,10 @@ class AppPages {
       page: () => const SettingView(),
       binding: SettingBinding(),
     ),
+    // GetPage(
+    //   name: _Paths.BOOK_DETAIL,
+    //   page: () => BookDetailView(),
+    //   binding: BookDetailBinding(),
+    // ),
   ];
 }
