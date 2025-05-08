@@ -1,16 +1,15 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:trex/app/modules/navigation/controllers/navigation_controller.dart';
 import 'package:trex/app/routes/app_pages.dart';
 import 'package:trex/app/config/config_service.dart';
 import 'package:trex/app/config/connection_service.dart';
 import 'package:trex/app/modules/theme/views/theme_view.dart';
 import 'package:trex/app/modules/theme/controllers/theme_controller.dart';
 import 'package:trex/app/modules/splash/views/components/no_internet_widget.dart';
+import 'package:trex/app/modules/navigation/controllers/navigation_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   // Initialize services
   await Get.putAsync(() => ConfigService().init());
   await Get.putAsync(() => ConnectionService().init());

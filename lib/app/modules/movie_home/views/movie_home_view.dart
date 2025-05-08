@@ -13,7 +13,6 @@ class MovieHomeView extends GetView<MovieHomeController> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Show Spot"),
-          centerTitle: true,
           actions: [
             IconButton(
                 onPressed: () {}, icon: const Icon(Icons.search_rounded)),

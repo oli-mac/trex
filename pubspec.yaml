@@ -57,6 +57,18 @@ dependencies:
   # A carousel slider widget, support infinite scroll and custom child widget.
   carousel_slider: ^5.0.0
   curved_labeled_navigation_bar: ^2.0.6
+  # https://pub.dev/packages/dio/install
+  # HTTP networking package, supports Interceptors, Aborting and canceling a request, Custom adapters, Transformers, etc.
+  dio: ^5.8.0+1
+  # https://pub.dev/packages/url_launcher/install
+  # launching a URL. Supports web, phone, SMS, and email schemes.
+  url_launcher: ^6.3.1
+  # https://pub.dev/packages/open_file/install
+  # call native APP to open files with string result in flutter, support iOS(UTI) / android(intent) / PC(ffi) / web(dart:html)
+  open_file: ^3.5.10
+  # https://pub.dev/packages/flutter_html/install
+  # rendering static HTML and CSS as Flutter widgets.
+  flutter_html: ^3.0.0
 
 
 

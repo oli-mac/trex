@@ -11,13 +11,9 @@ class SettingView extends GetView<SettingController> {
   Widget build(BuildContext context) {
     return MainScaffold(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('SettingView'),
-          centerTitle: true,
-        ),
         body: const Center(
           child: Text(
-            'SettingView is working',
+            'Setting is Coming Soon',
             style: TextStyle(fontSize: 20),
           ),
         ),
