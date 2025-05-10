@@ -12,6 +12,7 @@ abstract class Routes {
   static const SETTING = _Paths.SETTING;
   // static const BOOK_DETAIL = _Paths.BOOK_DETAIL;
   static const MOVIE_DETAIL = _Paths.MOVIE_DETAIL;
+  static const MOVIE_SEARCH = _Paths.MOVIE_SEARCH;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const SETTING = '/setting';
   // static const BOOK_DETAIL = '/book-detail';
   static const MOVIE_DETAIL = '/movie-detail';
+  static const MOVIE_SEARCH = '/movie-search';
 }

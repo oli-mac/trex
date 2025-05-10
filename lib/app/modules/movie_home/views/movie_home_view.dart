@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:trex/app/modules/MovieSearch/views/movie_search_view.dart';
 import '../controllers/movie_home_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:trex/app/modules/navigation/views/navigation_view.dart';
@@ -16,7 +17,10 @@ class MovieHomeView extends GetView<MovieHomeController> {
           title: const Text("Show Spot"),
           actions: [
             IconButton(
-                onPressed: () {}, icon: const Icon(Icons.search_rounded)),
+                onPressed: () {
+                  Get.to(() => MovieSearchView());
+                },
+                icon: const Icon(Icons.search_rounded)),
           ],
         ),
         body: Obx(() {
