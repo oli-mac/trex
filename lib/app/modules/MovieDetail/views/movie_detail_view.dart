@@ -16,7 +16,7 @@ class MovieDetailView extends StatelessWidget {
 
   String formatCurrency(int value) {
     final formatter = NumberFormat("#,###");
-    return "\$${formatter.format(value)}";
+    return "${formatter.format(value)}";
   }
 
   @override
@@ -60,16 +60,19 @@ class MovieDetailView extends StatelessWidget {
                             style: const TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold)),
                       ),
-                      _titleText(d["tagline"]),
+                      Center(
+                        child: Text(d["tagline"] ?? "",
+                            style: const TextStyle(fontSize: 16)),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          _titleText("${d["runtime"]} minutes"),
-                          // _titleText("\$${d["budget"]}"),
-                          _titleText(formatCurrency(d["budget"])),
-                          _titleText("${d["status"]}"),
-
+                          _titleText(
+                              "${d["runtime"]} minutes", Icons.access_time),
+                          _titleText(formatCurrency(d["budget"]),
+                              Icons.monetization_on),
+                          _titleText("${d["status"]}", Icons.check_circle),
                           // _titleText(d["adult"].toString() == "true"
                           //     ? "Adult"
                           //     : "Not Adult"),
@@ -82,14 +85,48 @@ class MovieDetailView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _rowText("Vote", d["vote_average"].toString()),
-                  _rowText("Language", d["original_language"]),
-                  _rowText("Date", d["release_date"]),
-                  _rowText("Revenue", formatCurrency(d["revenue"])),
-
-                  // _rowText("Revenue", "\$${d["revenue"]}"),
-                ],
+                children: List.generate(7, (index) {
+                  if (index.isOdd) {
+                    // Insert vertical divider between items
+                    return Container(
+                      width: 1,
+                      height: 30,
+                      color: Color(0xFF6DE1D2),
+                      margin: EdgeInsets.symmetric(horizontal: 8),
+                    );
+                  } else {
+                    final itemIndex = index ~/ 2;
+                    final dataMap = [
+                      {
+                        "label": "Vote",
+                        "value": d["vote_average"].toString(),
+                        "icon": Icons.star
+                      },
+                      {
+                        "label": "Language",
+                        "value": d["original_language"],
+                        "icon": Icons.language
+                      },
+                      {
+                        "label": "Date",
+                        "value": d["release_date"],
+                        "icon": Icons.calendar_today
+                      },
+                      {
+                        "label": "Revenue",
+                        "value": formatCurrency(
+                          d["revenue"],
+                        ),
+                        "icon": Icons.monetization_on
+                      },
+                    ];
+                    return _rowText(
+                      dataMap[itemIndex]["label"]!,
+                      dataMap[itemIndex]["icon"] as IconData,
+                      dataMap[itemIndex]["value"]!,
+                    );
+                  }
+                }),
               ),
               const SizedBox(height: 8),
               _infoText("Overview", d["overview"]),
@@ -111,52 +148,47 @@ class MovieDetailView extends StatelessWidget {
               // _infoText("IMDB ID", d["imdb_id"]),
 
               const SizedBox(height: 24),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton.icon(
-                      icon: const Icon(
-                        BoxIcons.bxl_imdb,
-                        size: 25,
-                      ),
-                      label: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text(d["imdb_id"] ?? "No IMDB ID"),
-                      ),
-                      onPressed: d["imdb_id"] != null
-                          ? () {
-                              Get.snackbar("IMDB ID", d["imdb_id"]);
-                            }
-                          : null,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton.icon(
+                    icon: const Icon(
+                      BoxIcons.bxl_imdb,
+                      size: 25,
                     ),
-                    ElevatedButton.icon(
-                      icon: const Icon(Icons.link),
-                      label: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: const Text("Movie Link"),
-                      ),
-                      onPressed: d["homepage"] != null &&
-                              d["homepage"].toString().isNotEmpty
-                          ? () async {
-                              final url = Uri.parse(d["homepage"]);
-                              if (await canLaunchUrl(url)) {
-                                await launchUrl(url,
-                                    mode: LaunchMode.externalApplication);
-                              } else {
-                                Get.snackbar(
-                                    "Error", "Could not open Movie URL");
-                              }
-                            }
-                          : null,
+                    label: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(d["imdb_id"] ?? "No IMDB ID"),
                     ),
-                  ],
-                ),
+                    onPressed: d["imdb_id"] != null
+                        ? () {
+                            Get.snackbar("IMDB ID", d["imdb_id"]);
+                          }
+                        : null,
+                  ),
+                  ElevatedButton.icon(
+                    clipBehavior: Clip.hardEdge,
+                    icon: const Icon(Icons.link),
+                    label: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: const Text("Movie Link"),
+                    ),
+                    onPressed: d["homepage"] != null &&
+                            d["homepage"].toString().isNotEmpty
+                        ? () async {
+                            final url = Uri.parse(d["homepage"]);
+                            if (await canLaunchUrl(url)) {
+                              await launchUrl(url,
+                                  mode: LaunchMode.externalApplication);
+                            } else {
+                              Get.snackbar("Error", "Could not open Movie URL");
+                            }
+                          }
+                        : null,
+                  ),
+                ],
               ),
               const SizedBox(height: 24),
-
-              const SizedBox(height: 12),
             ],
           ),
         );
@@ -172,24 +204,47 @@ class MovieDetailView extends StatelessWidget {
     );
   }
 
-  Widget _titleText(String? value) {
+  Widget _titleText(String? value, IconData? icon) {
     if (value == null || value.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-      child: Text("$value", style: const TextStyle(fontSize: 16)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 18,
+            color: Color(0xFF6DE1D2),
+          ),
+          const SizedBox(width: 4),
+          Text("$value", style: const TextStyle(fontSize: 16)),
+        ],
+      ),
     );
   }
 
-  Widget _rowText(String title, String? value) {
+  Widget _rowText(String title, IconData icon, String? value) {
     if (value == null || value.isEmpty) return const SizedBox.shrink();
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       child: Column(
         children: [
           Text("$title",
               style:
                   const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          Text("$value", style: const TextStyle(fontSize: 12)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 18,
+                color: const Color(0xFF6DE1D2),
+              ),
+              Text("$value", style: const TextStyle(fontSize: 12)),
+            ],
+          ),
         ],
       ),
     );

@@ -4,6 +4,8 @@ import '../modules/BookDetail/bindings/book_detail_binding.dart';
 import '../modules/BookDetail/views/book_detail_view.dart';
 import '../modules/MovieDetail/bindings/movie_detail_binding.dart';
 import '../modules/MovieDetail/views/movie_detail_view.dart';
+import '../modules/MovieSearch/bindings/movie_search_binding.dart';
+import '../modules/MovieSearch/views/movie_search_view.dart';
 import '../modules/bookshome/bindings/bookshome_binding.dart';
 import '../modules/bookshome/views/bookshome_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -72,5 +74,10 @@ class AppPages {
     //   page: () => const MovieDetailView(),
     //   binding: MovieDetailBinding(),
     // ),
+    GetPage(
+      name: _Paths.MOVIE_SEARCH,
+      page: () => MovieSearchView(),
+      binding: MovieSearchBinding(),
+    ),
   ];
 }
