@@ -1,11 +1,11 @@
 import 'dart:io' as io;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:open_file/open_file.dart';
-import 'package:trex/app/modules/navigation/views/navigation_view.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:trex/app/modules/navigation/views/navigation_view.dart';
 import 'package:trex/app/modules/BookDetail/models/book_detail_model.dart';
 
 class BookDetailView extends StatelessWidget {

@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:trex/app/modules/BookDetail/views/components/book_loading.dart';
 import 'package:trex/app/modules/bookshome/controllers/search_controller.dart'
     as custom;
-
-import 'package:trex/app/modules/BookDetail/views/components/book_loading.dart';
 
 class SearchPage extends StatelessWidget {
   SearchPage({Key? key}) : super(key: key);
@@ -25,45 +24,44 @@ class SearchPage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20),
-            child: Expanded(
-              child: TextField(
-                controller: searchTextController,
-                onSubmitted: (value) {
-                  if (value.trim().isNotEmpty) {
-                    controller.fetchSearchResults(value.trim());
-                  }
-                },
-                decoration: InputDecoration(
-                  hintText: 'Enter book title...',
-                  filled: true,
-                  fillColor: Colors.grey.shade200,
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      final query = searchTextController.text.trim();
-                      if (query.isNotEmpty) {
-                        controller.fetchSearchResults(query);
-                      }
-                    },
-                  ),
+            child: TextField(
+              controller: searchTextController,
+              onSubmitted: (value) {
+                if (value.trim().isNotEmpty) {
+                  controller.fetchSearchResults(value.trim());
+                }
+              },
+              decoration: InputDecoration(
+                hintText: 'Enter book title...',
+                filled: true,
+                fillColor: Colors.grey.shade200,
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: const BorderSide(color: Colors.black),
+                ),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    final query = searchTextController.text.trim();
+                    if (query.isNotEmpty) {
+                      controller.fetchSearchResults(query);
+                    }
+                  },
                 ),
               ),
             ),
           ),
+          const SizedBox(height: 8), // Optional spacing
           Expanded(
             child: Obx(() {
               if (controller.isLoading.value) {
@@ -73,18 +71,21 @@ class SearchPage extends StatelessWidget {
               if (!controller.hasResults.value ||
                   controller.searchResults['items'] == null) {
                 return const Center(
-                    child: Column(
-                  children: [
-                    Image(image: AssetImage('assets/images/nobooks.png')),
-                    SizedBox(height: 10),
-                    Text('No Book results found.'),
-                  ],
-                ));
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(image: AssetImage('assets/images/nobooks.png')),
+                      SizedBox(height: 10),
+                      Text('No Book results found.'),
+                    ],
+                  ),
+                );
               }
 
               final List items = controller.searchResults['items'];
 
               return ListView.builder(
+                padding: EdgeInsets.zero, // 👈 prevent default top padding
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   final item = items[index]['volumeInfo'];
@@ -114,7 +115,7 @@ class SearchPage extends StatelessWidget {
                 },
               );
             }),
-          )
+          ),
         ],
       ),
     );

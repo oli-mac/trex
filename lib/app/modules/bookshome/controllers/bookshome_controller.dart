@@ -1,10 +1,7 @@
-import 'package:get/get.dart';
-
-// lib/controllers/book_controller.dart
 import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import '../models/book_model.dart';
+import 'package:http/http.dart' as http;
 
 class BookshomeController extends GetxController {
   var isLoading = true.obs;
@@ -12,6 +9,7 @@ class BookshomeController extends GetxController {
   var fantasyBooks = <Book>[].obs;
   var horrorBooks = <Book>[].obs;
   var healthBooks = <Book>[].obs;
+  var fictionBooks = <Book>[].obs;
   var isSearching = false.obs;
   var searchResults = <Book>[].obs;
 
@@ -28,6 +26,7 @@ class BookshomeController extends GetxController {
       fantasyBooks.value = await fetchCategory('fantasy');
       horrorBooks.value = await fetchCategory('horror');
       healthBooks.value = await fetchCategory('health');
+      fictionBooks.value = await fetchCategory('fiction');
     } finally {
       isLoading(false);
     }
@@ -40,6 +39,7 @@ class BookshomeController extends GetxController {
       ...fantasyBooks,
       ...horrorBooks,
       ...healthBooks,
+      ...fictionBooks,
     ];
     final results = allBooks
         .where((book) => book.title.toLowerCase().contains(query.toLowerCase()))
