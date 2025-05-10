@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:trex/app/modules/BookDetail/views/components/book_loading.dart';
 
 class SearchFilter extends StatelessWidget {

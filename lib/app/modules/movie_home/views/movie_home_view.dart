@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:trex/app/modules/navigation/views/navigation_view.dart';
 import '../controllers/movie_home_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:trex/app/modules/navigation/views/navigation_view.dart';
+import 'package:trex/app/modules/MovieDetail/views/movie_detail_view.dart';
 
 class MovieHomeView extends GetView<MovieHomeController> {
   const MovieHomeView({super.key});
@@ -34,27 +35,35 @@ class MovieHomeView extends GetView<MovieHomeController> {
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),
-                CarouselSlider.builder(
-                  itemCount: controller.upcomingMovies.length,
-                  itemBuilder: (context, index, realIdx) {
-                    final movie = controller.upcomingMovies[index];
-                    return Container(
-                      width: double.infinity,
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                      child: Image.network(
-                        "https://image.tmdb.org/t/p/original/${movie.backDropPath}",
-                        fit: BoxFit.cover,
+                controller.upcomingMovies.isEmpty
+                    ? const SizedBox(
+                        height: 200,
+                        child: Center(child: Text("No upcoming movies found.")))
+                    : CarouselSlider.builder(
+                        itemCount: controller.upcomingMovies.length,
+                        itemBuilder: (context, index, realIdx) {
+                          final movie = controller.upcomingMovies[index];
+                          return InkWell(
+                            onTap: () => Get.to(
+                                () => MovieDetailView(movieId: movie.id)),
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Image.network(
+                                "https://image.tmdb.org/t/p/original/${movie.backDropPath}",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
+                        options: CarouselOptions(
+                          autoPlay: true,
+                          enlargeCenterPage: true,
+                          aspectRatio: 1.4,
+                          autoPlayInterval: const Duration(seconds: 3),
+                        ),
                       ),
-                    );
-                  },
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    aspectRatio: 1.4,
-                    autoPlayInterval: const Duration(seconds: 3),
-                  ),
-                ),
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -64,29 +73,37 @@ class MovieHomeView extends GetView<MovieHomeController> {
                 ),
                 SizedBox(
                   height: 200,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller.popularMovies.length,
-                    itemBuilder: (context, index) {
-                      final movie = controller.popularMovies[index];
-                      return Container(
-                        width: 150,
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15)),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.network(
-                            "https://image.tmdb.org/t/p/original/${movie.backDropPath}",
-                            height: 120,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
+                  child: controller.popularMovies.isEmpty
+                      ? const Center(child: Text("No popular movies available"))
+                      : ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: controller.popularMovies.length,
+                          itemBuilder: (context, index) {
+                            final movie = controller.popularMovies[index];
+                            return InkWell(
+                              onTap: () => Get.to(
+                                  () => MovieDetailView(movieId: movie.id)),
+                              child: Container(
+                                width: 150,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.network(
+                                    "https://image.tmdb.org/t/p/original/${movie.backDropPath}",
+                                    height: 120,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
                 ),
                 const SizedBox(height: 20),
                 Padding(
@@ -102,19 +119,23 @@ class MovieHomeView extends GetView<MovieHomeController> {
                     itemCount: controller.topRatedMovies.length,
                     itemBuilder: (context, index) {
                       final movie = controller.topRatedMovies[index];
-                      return Container(
-                        width: 150,
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15)),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.network(
-                            "https://image.tmdb.org/t/p/original/${movie.backDropPath}",
-                            height: 120,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
+                      return InkWell(
+                        onTap: () =>
+                            Get.to(() => MovieDetailView(movieId: movie.id)),
+                        child: Container(
+                          width: 150,
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.network(
+                              "https://image.tmdb.org/t/p/original/${movie.backDropPath}",
+                              height: 120,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       );

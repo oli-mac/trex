@@ -1,12 +1,10 @@
-import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:trex/app/modules/BookDetail/views/components/book_loading.dart';
-import 'package:trex/app/modules/bookshome/models/book_model.dart';
-import 'package:trex/app/modules/bookshome/views/components/search_page.dart';
-import 'package:trex/app/modules/navigation/views/navigation_view.dart';
-
+import 'package:flutter/material.dart';
 import '../controllers/bookshome_controller.dart';
+import 'package:trex/app/modules/bookshome/models/book_model.dart';
+import 'package:trex/app/modules/navigation/views/navigation_view.dart';
+import 'package:trex/app/modules/bookshome/views/components/search_page.dart';
+import 'package:trex/app/modules/BookDetail/views/components/book_loading.dart';
 
 class BookshomeView extends GetView<BookshomeController> {
   BookshomeView({super.key});
@@ -39,6 +37,8 @@ class BookshomeView extends GetView<BookshomeController> {
                     title: 'Fantasy', categoryBooks: controller.fantasyBooks),
                 CategorySection(
                     title: 'Horror', categoryBooks: controller.horrorBooks),
+                CategorySection(
+                    title: 'Fiction', categoryBooks: controller.fictionBooks),
                 CategorySection(
                     title: 'Health', categoryBooks: controller.healthBooks),
               ],

@@ -25,7 +25,10 @@ class MovieHomeController extends GetxController {
       popularMovies.value = await _fetchMovies("popular");
       topRatedMovies.value = await _fetchMovies("top_rated");
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load movies');
+      Get.snackbar(
+        'Error',
+        'Failed to load movies $e',
+      );
     } finally {
       isLoading.value = false;
     }
@@ -38,6 +41,10 @@ class MovieHomeController extends GetxController {
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['results'];
+      print("---------------------------------------------------");
+      print(data);
+      print("---------------------------------------------------");
+
       return data.map((movie) => Movie.fromMap(movie)).toList();
     } else {
       throw Exception('Failed to load $category movies');
