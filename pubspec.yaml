@@ -69,7 +69,18 @@ dependencies:
   # https://pub.dev/packages/flutter_html/install
   # rendering static HTML and CSS as Flutter widgets.
   flutter_html: ^3.0.0
+  # https://pub.dev/packages/intl
+  # Contains code to deal with internationalized/localized messages, date and number formatting and parsing, bi-directional text, and other internationalization issues.
   intl: ^0.20.2
+  # https://pub.dev/packages/hive/install
+  # Lightweight and blazing fast key-value database written in pure Dart. Strongly encrypted using AES-256.
+  hive: ^2.2.3
+  # https://pub.dev/packages/hive_flutter/install
+  # Extension for Hive. Makes it easier to use Hive in Flutter apps.
+  hive_flutter: ^1.1.0
+  # https://pub.dev/packages/path_provider/install
+  # getting commonly used locations on host platform file systems, such as the temp and app data directories.
+  path_provider: ^2.1.5
 
 
 
@@ -84,6 +95,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
