@@ -7,60 +7,48 @@ class OngoingProjectsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final projects = [
-      // {
-      //   'title': 'Mobile App',
-      //   'subtitle': 'E-Commerce',
-      //   'date': 'May 30, 2022',
-      //   'progress': 0.5
-      // },
-      // {
-      //   'title': 'Dashboard',
-      //   'subtitle': 'Web',
-      //   'date': 'May 30, 2022',
-      //   'progress': 0.8
-      // },
-      // {
-      //   'title': 'Banner',
-      //   'subtitle': 'Marketing',
-      //   'date': 'May 30, 2022',
-      //   'progress': 0.4
-      // },
-      // {
-      //   'title': 'UI/UX',
-      //   'subtitle': 'Task Manager',
-      //   'date': 'May 30, 2022',
-      //   'progress': 0.6
-      // },
-      // {
-      //   'title': 'Banner',
-      //   'subtitle': 'Marketing',
-      //   'date': 'May 30, 2022',
-      //   'progress': 0.2
-      // },
-      // {
-      //   'title': 'UI/UX',
-      //   'subtitle': 'Task Manager',
-      //   'date': 'May 30, 2022',
-      //   'progress': 0.5
-      // },
-      // {
-      //   'title': 'UI/UX',
-      //   'subtitle': 'Task Manager',
-      //   'date': 'May 30, 2022',
-      //   'progress': 0.6
-      // },
-      // {
-      //   'title': 'Banner',
-      //   'subtitle': 'Marketing',
-      //   'date': 'May 30, 2022',
-      //   'progress': 0.2
-      // },
-      // {
-      //   'title': 'UI/UX',
-      //   'subtitle': 'Task Manager',
-      //   'date': 'May 30, 2022',
-      //   'progress': 0.5
-      // },
+      {
+        'title': 'Summer List',
+        'subtitle': 'Books',
+        'date': 'May 30, 2022',
+        'progress': 0.5
+      },
+      {
+        'title': 'Favorite List',
+        'subtitle': 'Movies',
+        'date': 'May 30, 2022',
+        'progress': 0.8
+      },
+      {
+        'title': 'Valentine List',
+        'subtitle': 'TV Shows',
+        'date': 'May 30, 2022',
+        'progress': 0.4
+      },
+      {
+        'title': 'Internal List',
+        'subtitle': 'Books',
+        'date': 'May 30, 2022',
+        'progress': 0.6
+      },
+      {
+        'title': 'Book Club List',
+        'subtitle': 'Books',
+        'date': 'May 30, 2022',
+        'progress': 0.2
+      },
+      {
+        'title': 'November List',
+        'subtitle': 'Movies',
+        'date': 'May 30, 2022',
+        'progress': 0.5
+      },
+      {
+        'title': 'Lake View List',
+        'subtitle': 'TV Shows',
+        'date': 'May 30, 2022',
+        'progress': 0.6
+      },
     ];
 
     return Padding(

@@ -22,6 +22,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/theme/bindings/theme_binding.dart';
 import '../modules/theme/views/theme_view.dart';
+import '../modules/tvshows_detail/bindings/tvshows_detail_binding.dart';
+import '../modules/tvshows_detail/views/tvshows_detail_view.dart';
 import '../modules/tvshows_home/bindings/tvshows_home_binding.dart';
 import '../modules/tvshows_home/views/tvshows_home_view.dart';
 
@@ -93,5 +95,10 @@ class AppPages {
       page: () => const TvshowsHomeView(),
       binding: TvshowsHomeBinding(),
     ),
+    // GetPage(
+    //   name: _Paths.TVSHOWS_DETAIL,
+    //   page: () =>  TvshowsDetailView(),
+    //   binding: TvshowsDetailBinding(),
+    // ),
   ];
 }

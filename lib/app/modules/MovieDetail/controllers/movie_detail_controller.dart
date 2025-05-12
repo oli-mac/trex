@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:trex/app/config/constants.dart';
 
 class MovieDetailController extends GetxController {
   final RxBool isLoading = false.obs;
@@ -15,8 +16,7 @@ class MovieDetailController extends GetxController {
       url,
       headers: {
         "Accept": "application/json",
-        "Authorization":
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMDU1MmZlZjM4YjUxNzNkYzcxNGIxZjBjYTUxYmIzMiIsIm5iZiI6MTc0NjQ3NDIyMy40NDYsInN1YiI6IjY4MTkxNGVmMjgxNTI1MDMwMTg0ZDVkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WxL4QZjzxXCQlq974m0H6awOQO5KfaCFSiLWTri4p8o"
+        "Authorization": kTMDBBearerToken
       },
     );
     if (response.statusCode == 200) {
