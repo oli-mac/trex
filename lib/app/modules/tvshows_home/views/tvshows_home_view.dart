@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:trex/app/modules/MovieDetail/views/movie_detail_view.dart';
 import 'package:trex/app/modules/MovieSearch/views/movie_search_view.dart';
 import 'package:trex/app/modules/navigation/views/navigation_view.dart';
+import 'package:trex/app/modules/tvshows_detail/views/tvshows_detail_view.dart';
 
 import '../controllers/tvshows_home_controller.dart';
 
@@ -36,21 +37,21 @@ class TvshowsHomeView extends GetView<TvshowsHomeController> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: const Text('Airing Today',
+                  child: const Text('Top Rated',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),
-                controller.airingTodaySerious.isEmpty
+                controller.topRatedSerious.isEmpty
                     ? const SizedBox(
                         height: 200,
                         child: Center(child: Text("No upcoming movies found.")))
                     : CarouselSlider.builder(
-                        itemCount: controller.airingTodaySerious.length,
+                        itemCount: controller.topRatedSerious.length,
                         itemBuilder: (context, index, realIdx) {
-                          final serious = controller.airingTodaySerious[index];
+                          final serious = controller.topRatedSerious[index];
                           return InkWell(
                             onTap: () => Get.to(
-                                () => MovieDetailView(movieId: serious.id)),
+                                () => TvshowsDetailView(tvShowId: serious.id)),
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -87,8 +88,8 @@ class TvshowsHomeView extends GetView<TvshowsHomeController> {
                           itemBuilder: (context, index) {
                             final serious = controller.popularSerious[index];
                             return InkWell(
-                              onTap: () => Get.to(
-                                  () => MovieDetailView(movieId: serious.id)),
+                              onTap: () => Get.to(() =>
+                                  TvshowsDetailView(tvShowId: serious.id)),
                               child: Container(
                                 width: 150,
                                 margin:
@@ -128,8 +129,8 @@ class TvshowsHomeView extends GetView<TvshowsHomeController> {
                           itemBuilder: (context, index) {
                             final serious = controller.onTheAirSerious[index];
                             return InkWell(
-                              onTap: () => Get.to(
-                                  () => MovieDetailView(movieId: serious.id)),
+                              onTap: () => Get.to(() =>
+                                  TvshowsDetailView(tvShowId: serious.id)),
                               child: Container(
                                 width: 150,
                                 margin:
@@ -155,7 +156,7 @@ class TvshowsHomeView extends GetView<TvshowsHomeController> {
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: const Text('Top Rated',
+                  child: const Text('Airing Today',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),
@@ -163,12 +164,12 @@ class TvshowsHomeView extends GetView<TvshowsHomeController> {
                   height: 200,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: controller.topRatedSerious.length,
+                    itemCount: controller.airingTodaySerious.length,
                     itemBuilder: (context, index) {
-                      final serious = controller.topRatedSerious[index];
+                      final serious = controller.airingTodaySerious[index];
                       return InkWell(
-                        onTap: () =>
-                            Get.to(() => MovieDetailView(movieId: serious.id)),
+                        onTap: () => Get.to(
+                            () => TvshowsDetailView(tvShowId: serious.id)),
                         child: Container(
                           width: 150,
                           margin: const EdgeInsets.symmetric(horizontal: 10),

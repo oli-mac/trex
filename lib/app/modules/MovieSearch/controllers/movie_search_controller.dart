@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:trex/app/config/constants.dart';
 
 class MovieSearchController extends GetxController {
   var results = [].obs;
@@ -44,8 +45,7 @@ class MovieSearchController extends GetxController {
 
     final headers = {
       'accept': 'application/json',
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMDU1MmZlZjM4YjUxNzNkYzcxNGIxZjBjYTUxYmIzMiIsIm5iZiI6MTc0NjQ3NDIyMy40NDYsInN1YiI6IjY4MTkxNGVmMjgxNTI1MDMwMTg0ZDVkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WxL4QZjzxXCQlq974m0H6awOQO5KfaCFSiLWTri4p8o'
+      'Authorization': kTMDBBearerToken
     };
 
     isLoading.value = true;

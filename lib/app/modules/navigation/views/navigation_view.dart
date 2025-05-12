@@ -37,9 +37,9 @@ class MainScaffold extends StatelessWidget {
                   labelStyle: TextStyle(
                     color: Color(0xFF6DE1D2),
                   )),
-                CurvedNavigationBarItem(
+              CurvedNavigationBarItem(
                   child: Icon(
-                    Icons.video_collection_outlined,
+                    Icons.live_tv_outlined,
                     color: Color(0xFF6DE1D2),
                   ),
                   label: 'Serious',

@@ -1,32 +1,31 @@
-// movie_detail_view.dart
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../controllers/movie_detail_controller.dart';
+import '../controllers/tvshows_detail_controller.dart';
 
-class MovieDetailView extends StatelessWidget {
-  final int movieId;
-  final controller = Get.put(MovieDetailController());
+class TvshowsDetailView extends StatelessWidget {
+  final int tvShowId;
+  final controller = Get.put(TvshowsDetailController());
 
-  MovieDetailView({super.key, required this.movieId}) {
-    controller.fetchMovieDetails(movieId);
+  TvshowsDetailView({super.key, required this.tvShowId}) {
+    controller.fetchTvShowDetails(tvShowId);
   }
 
-  String formatCurrency(int value) {
+  String formatNumber(int value) {
     final formatter = NumberFormat("#,###");
-    return "${formatter.format(value)}";
+    return formatter.format(value);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Movie Detail"),
+        title: const Text("TV Show Detail"),
         actions: [
           IconButton(
-            icon: const Icon(Icons.addchart),
+            icon: const Icon(Icons.addchart ),
             onPressed: () {
               // Implement share functionality
               Get.snackbar("Share", "Add to watchlist");
@@ -39,9 +38,8 @@ class MovieDetailView extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-        final d = controller.movieDetails;
+        final d = controller.seriousDetails;
         return SingleChildScrollView(
-          // padding: const EdgeInsets.symmetric(vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -57,8 +55,6 @@ class MovieDetailView extends StatelessWidget {
                     ),
                   ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Center(
                         child: Image.network(
@@ -67,7 +63,7 @@ class MovieDetailView extends StatelessWidget {
                         ),
                       ),
                       Center(
-                        child: Text(d["title"] ?? "",
+                        child: Text(d["name"] ?? "",
                             style: const TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold)),
                       ),
@@ -77,16 +73,11 @@ class MovieDetailView extends StatelessWidget {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          _titleText(
-                              "${d["runtime"]} minutes", Icons.access_time),
-                          _titleText(formatCurrency(d["budget"]),
-                              Icons.monetization_on),
+                          // _titleText(
+                          //     "${d["number_of_seasons"]} seasons", Icons.star),
+                          _titleText("${d["type"]}", Icons.list_alt),
                           _titleText("${d["status"]}", Icons.check_circle),
-                          // _titleText(d["adult"].toString() == "true"
-                          //     ? "Adult"
-                          //     : "Not Adult"),
                         ],
                       ),
                     ],
@@ -95,15 +86,13 @@ class MovieDetailView extends StatelessWidget {
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: List.generate(7, (index) {
                   if (index.isOdd) {
-                    // Insert vertical divider between items
                     return Container(
                       width: 1,
                       height: 30,
-                      color: Color(0xFF6DE1D2),
-                      margin: EdgeInsets.symmetric(horizontal: 8),
+                      color: const Color(0xFF6DE1D2),
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
                     );
                   } else {
                     final itemIndex = index ~/ 2;
@@ -119,16 +108,14 @@ class MovieDetailView extends StatelessWidget {
                         "icon": Icons.language
                       },
                       {
-                        "label": "Date",
-                        "value": d["release_date"],
+                        "label": "First Air",
+                        "value": d["first_air_date"],
                         "icon": Icons.calendar_today
                       },
                       {
-                        "label": "Revenue",
-                        "value": formatCurrency(
-                          d["revenue"],
-                        ),
-                        "icon": Icons.monetization_on
+                        "label": "Last Air",
+                        "value": d["last_air_date"],
+                        "icon": Icons.calendar_month
                       },
                     ];
                     return _rowText(
@@ -140,24 +127,17 @@ class MovieDetailView extends StatelessWidget {
                 }),
               ),
               const SizedBox(height: 8),
-              _infoText("Overview", d["overview"]),
+              _infoText("", d["overview"]),
               _listSection("Genres", d["genres"], (e) => e["name"]),
-              _listSection("Spoken Languages", d["spoken_languages"],
-                  (e) => e["english_name"]),
-              _listSection("Production Countries", d["production_countries"],
-                  (e) => e["name"]),
+              _listSection("Created By", d["created_by"], (e) => e["name"]),
+              _listSection("Networks", d["networks"], (e) => e["name"]),
+              _listSection("Episode Runtime", d["episode_run_time"],
+                  (e) => "$e minutes"),
+              _listSection("Seasons", d["seasons"],
+                  (e) => "${e["name"]} (${e["episode_count"]} episodes)"),
               _listSection("Production Companies", d["production_companies"],
                   (e) => "${e["name"]} (${e["origin_country"]})"),
               _listSection("Origin Countries", d["origin_country"]),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [],
-              ),
-              // _infoText("Popularity", d["popularity"].toString()),
-              // _infoText("Vote Count", d["vote_count"].toString()),
-              // _infoText("IMDB ID", d["imdb_id"]),
-
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -178,11 +158,10 @@ class MovieDetailView extends StatelessWidget {
                         : null,
                   ),
                   ElevatedButton.icon(
-                    clipBehavior: Clip.hardEdge,
                     icon: const Icon(Icons.link),
-                    label: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: const Text("Movie Link"),
+                    label: const Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Text("Show Link"),
                     ),
                     onPressed: d["homepage"] != null &&
                             d["homepage"].toString().isNotEmpty
@@ -192,7 +171,8 @@ class MovieDetailView extends StatelessWidget {
                               await launchUrl(url,
                                   mode: LaunchMode.externalApplication);
                             } else {
-                              Get.snackbar("Error", "Could not open Movie URL");
+                              Get.snackbar(
+                                  "Error", "Could not open TV Show URL");
                             }
                           }
                         : null,
@@ -211,7 +191,7 @@ class MovieDetailView extends StatelessWidget {
     if (value == null || value.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-      child: Text("$title: $value", style: const TextStyle(fontSize: 16)),
+      child: Text("$value", style: const TextStyle(fontSize: 16)),
     );
   }
 
@@ -220,16 +200,14 @@ class MovieDetailView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(
             icon,
             size: 18,
-            color: Color(0xFF6DE1D2),
+            color: const Color(0xFF6DE1D2),
           ),
           const SizedBox(width: 4),
-          Text("$value", style: const TextStyle(fontSize: 16)),
+          Text(value, style: const TextStyle(fontSize: 16)),
         ],
       ),
     );
@@ -241,19 +219,17 @@ class MovieDetailView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       child: Column(
         children: [
-          Text("$title",
+          Text(title,
               style:
                   const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
                 icon,
                 size: 18,
                 color: const Color(0xFF6DE1D2),
               ),
-              Text("$value", style: const TextStyle(fontSize: 12)),
+              Text(value, style: const TextStyle(fontSize: 12)),
             ],
           ),
         ],
@@ -263,9 +239,78 @@ class MovieDetailView extends StatelessWidget {
 
   Widget _listSection(String title, dynamic items,
       [String Function(dynamic)? getText]) {
-    if (items == null || (items is List && items.isEmpty))
+    if (items == null || (items is List && items.isEmpty)) {
       return const SizedBox.shrink();
+    }
 
+    if (title == "Seasons") {
+      final totalSeasons = controller.seriousDetails["number_of_seasons"] ?? 0;
+      final totalEpisodes =
+          controller.seriousDetails["number_of_episodes"] ?? 0;
+
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "$title:",
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                border: Border.all(color: const Color(0xFF6DE1D2)),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Obx(() => DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      hint: Text(
+                        "$totalSeasons Seasons And $totalEpisodes Episodes in Total",
+                        style: const TextStyle(
+                          fontSize: 15,
+                          // color: const Color(0xFF6DE1D2),
+                        ),
+                      ),
+                      value: controller.selectedSeason.value.isNotEmpty
+                          ? controller.selectedSeason.value
+                          : null,
+                      items: (items as List)
+                          .map<DropdownMenuItem<String>>((season) {
+                        final seasonNumber = season["season_number"] ?? 0;
+                        final episodeCount = season["episode_count"] ?? 0;
+                        final seasonName = season["name"] ??
+                            "Season ${seasonNumber == 0 ? 'Specials' : seasonNumber}";
+
+                        return DropdownMenuItem<String>(
+                          value: seasonName,
+                          child: Text(
+                            "$seasonName (${episodeCount} episodes)",
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        controller.selectedSeason.value = value ?? "";
+                      },
+                      style: const TextStyle(
+                        // color: Colors.white,
+                        fontSize: 15,
+                      ),
+                      dropdownColor: Colors.grey[900],
+                      icon: const Icon(Icons.arrow_drop_down,
+                          color: Color(0xFF6DE1D2)),
+                    ),
+                  )),
+            ),
+          ],
+        ),
+      );
+    }
+
+    // Original handling for other lists
     final values = (items as List)
         .map((e) => getText != null ? getText(e) : e.toString())
         .toList();
@@ -290,7 +335,7 @@ class MovieDetailView extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                     decoration: BoxDecoration(
                       color: Colors.transparent,
-                      border: Border.all(color: Color(0xFF6DE1D2)),
+                      border: Border.all(color: const Color(0xFF6DE1D2)),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
