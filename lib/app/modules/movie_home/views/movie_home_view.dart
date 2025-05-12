@@ -71,6 +71,48 @@ class MovieHomeView extends GetView<MovieHomeController> {
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
+                  child: const Text('Now Playing',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                ),
+                SizedBox(
+                  height: 200,
+                  child: controller.nowPlayingMovies.isEmpty
+                      ? const Center(
+                          child: Text("Now Playing movies unavailable"))
+                      : ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: controller.nowPlayingMovies.length,
+                          itemBuilder: (context, index) {
+                            final movie = controller.nowPlayingMovies[index];
+                            return InkWell(
+                              onTap: () => Get.to(
+                                  () => MovieDetailView(movieId: movie.id)),
+                              child: Container(
+                                width: 150,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.network(
+                                    "https://image.tmdb.org/t/p/original/${movie.backDropPath}",
+                                    height: 120,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: const Text('Popular',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),

@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/BookDetail/bindings/book_detail_binding.dart';
 import '../modules/BookDetail/views/book_detail_view.dart';
+import '../modules/List/bindings/list_binding.dart';
+import '../modules/List/views/list_view.dart';
 import '../modules/MovieDetail/bindings/movie_detail_binding.dart';
 import '../modules/MovieDetail/views/movie_detail_view.dart';
 import '../modules/MovieSearch/bindings/movie_search_binding.dart';
@@ -78,6 +80,11 @@ class AppPages {
       name: _Paths.MOVIE_SEARCH,
       page: () => MovieSearchView(),
       binding: MovieSearchBinding(),
+    ),
+    GetPage(
+      name: _Paths.LIST,
+      page: () => const ListView(),
+      binding: ListBinding(),
     ),
   ];
 }

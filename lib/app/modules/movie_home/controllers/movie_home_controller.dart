@@ -9,6 +9,7 @@ class MovieHomeController extends GetxController {
   var upcomingMovies = <Movie>[].obs;
   var popularMovies = <Movie>[].obs;
   var topRatedMovies = <Movie>[].obs;
+  var nowPlayingMovies = <Movie>[].obs;
 
   var isLoading = false.obs;
 
@@ -24,6 +25,7 @@ class MovieHomeController extends GetxController {
       upcomingMovies.value = await _fetchMovies("upcoming");
       popularMovies.value = await _fetchMovies("popular");
       topRatedMovies.value = await _fetchMovies("top_rated");
+      nowPlayingMovies.value = await _fetchMovies("now_playing");
     } catch (e) {
       Get.snackbar(
         'Error',
@@ -41,9 +43,9 @@ class MovieHomeController extends GetxController {
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['results'];
-      print("---------------------------------------------------");
-      print(data);
-      print("---------------------------------------------------");
+      // print("---------------------------------------------------");
+      // print(data);
+      // print("---------------------------------------------------");
 
       return data.map((movie) => Movie.fromMap(movie)).toList();
     } else {
