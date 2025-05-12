@@ -12,10 +12,14 @@ class BottomNavController extends GetxController {
       case 1:
         Get.offAllNamed('/movie-home');
         break;
+
       case 2:
-        Get.offAllNamed('/bookshome');
+        Get.offAllNamed('/tvshows-home');
         break;
       case 3:
+        Get.offAllNamed('/bookshome');
+        break;
+      case 4:
         Get.offAllNamed('/setting');
 
         break;

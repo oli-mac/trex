@@ -37,6 +37,15 @@ class MainScaffold extends StatelessWidget {
                   labelStyle: TextStyle(
                     color: Color(0xFF6DE1D2),
                   )),
+                CurvedNavigationBarItem(
+                  child: Icon(
+                    Icons.video_collection_outlined,
+                    color: Color(0xFF6DE1D2),
+                  ),
+                  label: 'Serious',
+                  labelStyle: TextStyle(
+                    color: Color(0xFF6DE1D2),
+                  )),
               CurvedNavigationBarItem(
                   child: Icon(
                     Icons.my_library_books_outlined,
