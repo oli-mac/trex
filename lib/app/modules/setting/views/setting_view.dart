@@ -9,28 +9,53 @@ import 'package:trex/app/modules/navigation/views/navigation_view.dart';
 
 class SettingView extends GetView<SettingController> {
   const SettingView({super.key});
+
   @override
   Widget build(BuildContext context) {
     final SettingController controller = Get.put(SettingController());
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return MainScaffold(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Settings"),
-          actions: [
-            IconButton(
-              icon: Obx(() {
-                final isDark = Get.find<ThemeController>().themeMode.value ==
-                    ThemeMode.dark;
-                return Icon(
-                    size: 30, isDark ? Icons.light_mode : Icons.dark_mode);
-              }),
-              onPressed: () => Get.find<ThemeController>().toggleTheme(),
-            )
-          ],
-        ),
         body: Column(
           children: [
-            // Expanded(flex: 1, child: Container()),
+            Expanded(flex: 1, child: Container()),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.asset(
+                    isDark
+                        ? 'assets/images/logo-dark.png'
+                        : 'assets/images/logo.png',
+                    width: 60,
+                    height: 60,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('John Doe',
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
+                      SizedBox(height: 4),
+                      Text("greetingJohnDoe@gmail.com",
+                          style: TextStyle(fontSize: 14, color: Colors.grey)),
+                    ],
+                  ),
+                  IconButton(
+                    icon: Obx(() {
+                      final isDark =
+                          Get.find<ThemeController>().themeMode.value ==
+                              ThemeMode.dark;
+                      return Icon(
+                          size: 30,
+                          isDark ? Icons.light_mode : Icons.dark_mode);
+                    }),
+                    onPressed: () => Get.find<ThemeController>().toggleTheme(),
+                  )
+                ],
+              ),
+            ),
             Expanded(
               flex: 9,
               child: SingleChildScrollView(

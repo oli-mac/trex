@@ -31,7 +31,7 @@ class SplashController extends GetxController {
       Get.snackbar(
         'Connection Established',
         'You are connected via $connectionType',
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.green,
         colorText: Colors.white,
         duration: Duration(seconds: 2),
